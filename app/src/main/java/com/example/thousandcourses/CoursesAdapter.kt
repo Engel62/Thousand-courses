@@ -1,16 +1,13 @@
 package com.example.thousandcourses
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thousandcourses.databinding.ItemCourseBinding
 
 class CoursesAdapter(
-    private val courses: List<Course>,
+    val courses: List<Course>,
     private val onFavoriteClick: (Course) -> Unit
 ) : RecyclerView.Adapter<CoursesAdapter.CourseViewHolder>() {
 
@@ -56,7 +53,7 @@ class CoursesAdapter(
                     else android.R.drawable.btn_star_big_off
                 )
                 ivFavorite.setColorFilter(
-                    if (course.hasLike) android.graphics.Color.GREEN
+                    if (course.hasLike) android.graphics.Color.parseColor("#4CAF50") // Зеленый
                     else android.graphics.Color.GRAY
                 )
 

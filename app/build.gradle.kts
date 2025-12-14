@@ -61,6 +61,7 @@ dependencies {
 
     // Coroutines (из ТЗ)
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("com.google.code.gson:gson:2.10.1")
 
     // Navigation Component (для нижнего меню и перехода между экранами)
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
