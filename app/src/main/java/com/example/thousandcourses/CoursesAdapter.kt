@@ -1,16 +1,13 @@
 package com.example.thousandcourses
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thousandcourses.databinding.ItemCourseBinding
 
 class CoursesAdapter(
-    private val courses: List<Course>,
+    val courses: List<Course>,
     private val onFavoriteClick: (Course) -> Unit
 ) : RecyclerView.Adapter<CoursesAdapter.CourseViewHolder>() {
 
@@ -35,10 +32,9 @@ class CoursesAdapter(
 
         fun bind(course: Course) {
             binding.apply {
-                // Устанавливаем данные
+
                 tvTitle.text = course.title
 
-                // Обрезаем описание до 2 строк (по ТЗ)
                 tvDescription.text = if (course.text.lines().size > 2) {
                     course.text.lines().take(2).joinToString("\n") + "..."
                 } else {
@@ -49,18 +45,18 @@ class CoursesAdapter(
                 tvRating.text = course.rate.toString()
                 tvDate.text = course.publishDate
 
-                // Иконка избранного
+
                 ivFavorite.isSelected = course.hasLike
                 ivFavorite.setImageResource(
                     if (course.hasLike) android.R.drawable.btn_star_big_on
                     else android.R.drawable.btn_star_big_off
                 )
                 ivFavorite.setColorFilter(
-                    if (course.hasLike) android.graphics.Color.GREEN
+                    if (course.hasLike) android.graphics.Color.parseColor("#4CAF50") // Зеленый
                     else android.graphics.Color.GRAY
                 )
 
-                // Обработчики кликов
+
                 ivFavorite.setOnClickListener {
                     onFavoriteClick(course)
                 }
@@ -73,7 +69,6 @@ class CoursesAdapter(
                     ).show()
                 }
 
-                // Клик на всей карточке
                 root.setOnClickListener {
                     Toast.makeText(
                         itemView.context,

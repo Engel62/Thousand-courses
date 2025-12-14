@@ -4,6 +4,7 @@
     <!-- Разрешение на интернет (для API и соцсетей) -->
     <uses-permission android:name="android.permission.INTERNET" />
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,6 +23,8 @@
 
         <!-- MainActivity - главный экран -->
         <activity android:name=".MainActivity" />
+        <activity android:name=".FavoritesActivity" />
+        <activity android:name=".AccountActivity" />
 
     </application>
 
