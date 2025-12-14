@@ -56,24 +56,23 @@ class FavoritesActivity : AppCompatActivity() {
     private fun removeFromFavorites(course: Course) {
         favoritesManager.removeFavoriteCourse(course.id)
 
-        // Показываем сообщение
+
         Toast.makeText(
             this,
             "Курс \"${course.title}\" удален из избранного",
             Toast.LENGTH_SHORT
         ).show()
 
-        // Перезагружаем список
+
         loadFavorites()
     }
 
     override fun onResume() {
         super.onResume()
-        // Обновляем список при возвращении на экран
+
         loadFavorites()
     }
 
-    // Обработка кнопки "назад" в ActionBar
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true

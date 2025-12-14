@@ -32,10 +32,9 @@ class CoursesAdapter(
 
         fun bind(course: Course) {
             binding.apply {
-                // Устанавливаем данные
+
                 tvTitle.text = course.title
 
-                // Обрезаем описание до 2 строк (по ТЗ)
                 tvDescription.text = if (course.text.lines().size > 2) {
                     course.text.lines().take(2).joinToString("\n") + "..."
                 } else {
@@ -46,7 +45,7 @@ class CoursesAdapter(
                 tvRating.text = course.rate.toString()
                 tvDate.text = course.publishDate
 
-                // Иконка избранного
+
                 ivFavorite.isSelected = course.hasLike
                 ivFavorite.setImageResource(
                     if (course.hasLike) android.R.drawable.btn_star_big_on
@@ -57,7 +56,7 @@ class CoursesAdapter(
                     else android.graphics.Color.GRAY
                 )
 
-                // Обработчики кликов
+
                 ivFavorite.setOnClickListener {
                     onFavoriteClick(course)
                 }
@@ -70,7 +69,6 @@ class CoursesAdapter(
                     ).show()
                 }
 
-                // Клик на всей карточке
                 root.setOnClickListener {
                     Toast.makeText(
                         itemView.context,

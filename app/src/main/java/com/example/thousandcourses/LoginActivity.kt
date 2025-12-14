@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.thousandcourses.databinding.ActivityLoginBinding
 
@@ -23,7 +22,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setupInputValidation() {
-        // Проверяем поля в реальном времени
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -40,9 +38,8 @@ class LoginActivity : AppCompatActivity() {
         val email = binding.etEmail.text.toString()
         val password = binding.etPassword.text.toString()
 
-        // Простая валидация email (как в ТЗ)
         val isEmailValid = android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-        val isPasswordValid = password.length >= 3 // Минимум 3 символа
+        val isPasswordValid = password.length >= 3
 
         binding.btnLogin.isEnabled = isEmailValid && isPasswordValid
     }
@@ -51,12 +48,10 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             val email = binding.etEmail.text.toString()
 
-            // Переход на главный экран
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("USER_EMAIL", email) // Можно передать email
+            intent.putExtra("USER_EMAIL", email)
             startActivity(intent)
 
-            // Закрываем экран входа, чтобы нельзя было вернуться назад
             finish()
         }
     }

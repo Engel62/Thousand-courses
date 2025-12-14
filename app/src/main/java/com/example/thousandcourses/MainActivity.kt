@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity() {
         recyclerView = binding.recyclerViewCourses
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Получаем курсы (можно заменить на MockData.getCourses())
         allCourses = listOf(
             Course(
                 id = 1,
@@ -90,7 +89,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun toggleFavorite(course: Course) {
         if (favoritesManager.isFavorite(course.id)) {
-            // Удаляем из избранного
             favoritesManager.removeFavoriteCourse(course.id)
             course.hasLike = false
             Toast.makeText(
@@ -99,7 +97,6 @@ class MainActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT
             ).show()
         } else {
-            // Добавляем в избранное
             favoritesManager.saveFavoriteCourse(course)
             course.hasLike = true
             Toast.makeText(
@@ -109,17 +106,14 @@ class MainActivity : AppCompatActivity() {
             ).show()
         }
 
-        // Обновляем отображение
         recyclerView.adapter?.notifyDataSetChanged()
     }
 
     private fun setupViews() {
-        // Кнопка сортировки
         binding.btnSort.setOnClickListener {
             sortCoursesByDate()
         }
 
-        // Поиск и фильтр пока неактивны (хардкод по ТЗ)
         binding.etSearch.isEnabled = false
         binding.ivFilter.isEnabled = false
     }
@@ -128,7 +122,6 @@ class MainActivity : AppCompatActivity() {
         val adapter = recyclerView.adapter as CoursesAdapter
         val sortedCourses = adapter.courses.sortedByDescending { it.publishDate }
 
-        // Обновляем адаптер с отсортированными данными
         recyclerView.adapter = CoursesAdapter(sortedCourses) { course ->
             toggleFavorite(course)
         }
@@ -145,7 +138,6 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
-                    // Уже на главной
                     true
                 }
                 R.id.navigation_favorites -> {
@@ -165,8 +157,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        // Обновляем список при возвращении на экран
-        // (на случай, если избранное изменилось в другом месте)
         val adapter = recyclerView.adapter as CoursesAdapter
         val updatedCourses = adapter.courses.map { course ->
             course.copy(hasLike = favoritesManager.isFavorite(course.id))
@@ -178,7 +168,6 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-// Модель курса (если Course.kt еще не создан)
 data class Course(
     val id: Int,
     val title: String,
